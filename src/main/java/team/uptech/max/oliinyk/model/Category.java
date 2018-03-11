@@ -14,10 +14,12 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "categories")
 @NamedQueries({ @NamedQuery(name = "Category.All", query = "SELECT category FROM Category category") })
-public class Category implements Comparable<Category> {
+public class Category {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,6 +32,8 @@ public class Category implements Comparable<Category> {
 	@Column(name = "description", nullable = false)
 	private String description;
 
+	// @JsonIgnore
+	@JsonBackReference
 	@OneToMany(mappedBy = "categories", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Product> products;
 
@@ -71,12 +75,6 @@ public class Category implements Comparable<Category> {
 
 	public void setProducts(List<Product> products) {
 		this.products = products;
-	}
-
-	@Override
-	public String toString() {
-		return "Category [id=" + id + ", name=" + name + ", description=" + description + ", products=" + products
-				+ "]";
 	}
 
 	@Override
@@ -122,7 +120,10 @@ public class Category implements Comparable<Category> {
 		return true;
 	}
 
-	public int compareTo(Category category) {
-		return getName().compareTo(category.getName());
+	@Override
+	public String toString() {
+		return "Category [id=" + id + ", name=" + name + ", description=" + description + ", products=" + products
+				+ "]";
 	}
+
 }
