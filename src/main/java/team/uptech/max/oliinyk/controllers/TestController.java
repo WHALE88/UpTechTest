@@ -25,10 +25,7 @@ public class TestController {
 	@Autowired
 	private GeneralService<Product> productService;
 
-	@RequestMapping(value = "/test")
-	String home() {
-		return "My Test Spring Boot!";
-	}
+	
 
 	/*
 	 * @RequestMapping(value = "/add") String add() { Category category = new
@@ -84,6 +81,7 @@ public class TestController {
 			json.put("descriprion", category.getDescription());
 			json.put("total", category.getProducts().stream().count());
 			str.add(json.toString());
+			System.out.println(json.toString());
 		}
 		return new ResponseEntity<List<String>>(str, HttpStatus.OK);
 	}
