@@ -72,10 +72,14 @@ public class ProductController {
 
 	}
 
-	@GetMapping(value = "/ddd", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Product>> getPtodByCatname() {
+	@PostMapping(value = "/getbycatname", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Product>> getPtodByCatname(@RequestParam(value = "category") String name) {
+		return new ResponseEntity<List<Product>>(productService.getProdByCategoryName(name), HttpStatus.OK);
+	}
 
-		return new ResponseEntity<List<Product>>(productService.getProdByCategoryName("ss"), HttpStatus.OK);
+	@PostMapping(value = "/getbycatdesc", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Product>> getPtodByCatDesc(@RequestParam(value = "category") String description) {
+		return new ResponseEntity<List<Product>>(productService.getProdByCategoryDesc(description), HttpStatus.OK);
 
 	}
 

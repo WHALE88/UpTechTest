@@ -35,4 +35,10 @@ public class VievController {
 		return "findcategory";
 	}
 
+	@GetMapping(value = "/getbycatnameordesc")
+	public String getByCatNameOrDesc(ModelMap model) {
+		model.addAttribute("category", categoryService.findAll());
+		return "getbycatnameordesc";
+	}
+
 }
