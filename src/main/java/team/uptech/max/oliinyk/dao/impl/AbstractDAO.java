@@ -9,7 +9,9 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-public abstract class AbstractDAO<E>  {
+import team.uptech.max.oliinyk.dao.DAO;
+
+public abstract class AbstractDAO<E> implements DAO<E> {
 
 	private Class<E> clazz;
 
