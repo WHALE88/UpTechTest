@@ -4,12 +4,8 @@ import org.hibernate.EmptyInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@SuppressWarnings("serial")
 public class HibernateStatisticsInterceptor extends EmptyInterceptor {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 	private static final Logger log = LoggerFactory.getLogger(HibernateStatisticsInterceptor.class);
 
@@ -33,7 +29,6 @@ public class HibernateStatisticsInterceptor extends EmptyInterceptor {
 		if (count != null) {
 			queryCount.set(count + 1);
 		}
-		// log.info(sql);
 		return super.onPrepareStatement(sql);
 	}
 }

@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import team.uptech.max.oliinyk.model.Category;
-import team.uptech.max.oliinyk.service.GeneralService;
+import team.uptech.max.oliinyk.service.CategoryService;
 
 @RestController
 public class CategoryController {
 
 	@Autowired
-	private GeneralService<Category> categoryService;
+	private CategoryService<Category> categoryService;
 
 	@PostMapping(value = "/findcategory", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> findCategoryById(@RequestParam("id") long id) {

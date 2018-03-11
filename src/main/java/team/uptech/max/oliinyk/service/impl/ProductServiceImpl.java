@@ -7,16 +7,16 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import team.uptech.max.oliinyk.dao.DAO;
+import team.uptech.max.oliinyk.dao.ProdDao;
 import team.uptech.max.oliinyk.model.Product;
-import team.uptech.max.oliinyk.service.GeneralService;
+import team.uptech.max.oliinyk.service.ProductService;
 
 @Service
 @Transactional
-public class ProductServiceImpl implements GeneralService<Product> {
+public class ProductServiceImpl implements ProductService<Product> {
 
 	@Autowired
-	DAO<Product> productDao;
+	ProdDao<Product> productDao;
 
 	@Transactional
 	public void save(Product entity) {
@@ -51,18 +51,10 @@ public class ProductServiceImpl implements GeneralService<Product> {
 	}
 
 	@Transactional
-	public List<Product> getCategoriesByName(String name) {
-		return productDao.getCategoriesByName(name);
+	public List<Product> getProdByCategoryName(String name) {
+		return productDao.getProdByCategoryName(name);
 	}
 
-	@Transactional
-	public List<Product> getCategoriesByDescription(String description) {
-		return productDao.getCategoriesByDescription(description);
-	}
 
-	@Transactional
-	public List<Product> getCategoriesByNameDescription(String name, String description) {
-		return productDao.getCategoriesByNameDescription(name, description);
-	}
 
 }

@@ -1,5 +1,7 @@
 package team.uptech.max.oliinyk.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -12,16 +14,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import team.uptech.max.oliinyk.model.Category;
 import team.uptech.max.oliinyk.model.Product;
-import team.uptech.max.oliinyk.service.GeneralService;
+import team.uptech.max.oliinyk.service.CategoryService;
+import team.uptech.max.oliinyk.service.ProductService;
 
 @RestController
 public class ProductController {
 
 	@Autowired
-	private GeneralService<Category> categoryService;
+	private CategoryService<Category> categoryService;
 
 	@Autowired
-	private GeneralService<Product> productService;
+	private ProductService<Product> productService;
 
 	@PostMapping(value = "/findproduct", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Product> findProductById(@RequestParam("id") long id) {
@@ -66,6 +69,13 @@ public class ProductController {
 		product.setDescription(description);
 		productService.update(product);
 		return new ResponseEntity<Long>(id, HttpStatus.OK);
+
+	}
+
+	@GetMapping(value = "/ddd", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Product>> getPtodByCatname() {
+
+		return new ResponseEntity<List<Product>>(productService.getProdByCategoryName("ss"), HttpStatus.OK);
 
 	}
 

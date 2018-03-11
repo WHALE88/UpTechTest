@@ -7,16 +7,16 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import team.uptech.max.oliinyk.dao.DAO;
+import team.uptech.max.oliinyk.dao.CategoryDAO;
 import team.uptech.max.oliinyk.model.Category;
-import team.uptech.max.oliinyk.service.GeneralService;
+import team.uptech.max.oliinyk.service.CategoryService;
 
 @Service
 @Transactional
-public class CategoryServiceImpl implements GeneralService<Category> {
+public class CategoryServiceImpl implements CategoryService<Category> {
 
 	@Autowired
-	DAO<Category> categoryDao;
+	CategoryDAO<Category> categoryDao;
 
 	@Transactional
 	public void save(Category entity) {
@@ -62,4 +62,5 @@ public class CategoryServiceImpl implements GeneralService<Category> {
 	public List<Category> getCategoriesByNameDescription(String name, String description) {
 		return categoryDao.getCategoriesByNameDescription(name, description);
 	}
+
 }

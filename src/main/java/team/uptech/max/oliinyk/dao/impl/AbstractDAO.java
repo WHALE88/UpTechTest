@@ -9,9 +9,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import team.uptech.max.oliinyk.dao.DAO;
-
-public abstract class AbstractDAO<E> implements DAO<E> {
+public abstract class AbstractDAO<E> {
 
 	private Class<E> clazz;
 
@@ -65,22 +63,6 @@ public abstract class AbstractDAO<E> implements DAO<E> {
 		}
 	}
 
-	public List<E> getCategoriesByName(String name) {
-		List<E> result = getEntityManager().createNamedQuery(clazz.getSimpleName() + ".getByName", clazz)
-				.setParameter("name", name).getResultList();
-		return result;
-	}
-
-	public List<E> getCategoriesByDescription(String description) {
-		List<E> result = getEntityManager().createNamedQuery(clazz.getSimpleName() + ".getByDescription", clazz)
-				.setParameter("description", description).getResultList();
-		return result;
-	}
-
-	public List<E> getCategoriesByNameDescription(String name, String description) {
-		List<E> result = getEntityManager().createNamedQuery(clazz.getSimpleName() + "getByName&Desc", clazz)
-				.setParameter("name", name).setParameter("description", description).getResultList();
-		return result;
-	}
+	
 
 }

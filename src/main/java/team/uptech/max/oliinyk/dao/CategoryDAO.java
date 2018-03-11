@@ -1,8 +1,8 @@
-package team.uptech.max.oliinyk.service;
+package team.uptech.max.oliinyk.dao;
 
 import java.util.List;
 
-public interface GeneralService<E> {
+public interface CategoryDAO<E> {
 	void save(E entity);
 
 	void delete(long id);

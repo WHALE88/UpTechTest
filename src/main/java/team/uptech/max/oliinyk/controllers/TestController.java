@@ -14,30 +14,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import team.uptech.max.oliinyk.model.Category;
 import team.uptech.max.oliinyk.model.Product;
-import team.uptech.max.oliinyk.service.GeneralService;
+import team.uptech.max.oliinyk.service.CategoryService;
+import team.uptech.max.oliinyk.service.ProductService;
 
 @RestController
 public class TestController {
 
 	@Autowired
-	private GeneralService<Category> categoryService;
+	private CategoryService<Category> categoryService;
 
 	@Autowired
-	private GeneralService<Product> productService;
-
-	
-
-	/*
-	 * @RequestMapping(value = "/add") String add() { Category category = new
-	 * Category("vodka", "vodka"); Product product = new Product("vodka", 12,
-	 * "finlandia"); product.setCategories(category); productService.save(product);
-	 * Product product2 = new Product("vodka", 13, "nemiroff");
-	 * productService.save(product2); product2.setCategories(category); Product
-	 * product3 = new Product("vodka", 13, "absolut");
-	 * productService.save(product3);
-	 * 
-	 * return "Product added with Category!"; }
-	 */
+	private ProductService<Product> productService;
 
 	@GetMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Product> createCustomer() {

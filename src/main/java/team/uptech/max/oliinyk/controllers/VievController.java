@@ -6,13 +6,13 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import team.uptech.max.oliinyk.model.Category;
-import team.uptech.max.oliinyk.service.GeneralService;
+import team.uptech.max.oliinyk.service.CategoryService;
 
 @Controller
 public class VievController {
 
 	@Autowired
-	private GeneralService<Category> categoryService;
+	private CategoryService<Category> categoryService;
 
 	@GetMapping(value = "/addproduct")
 	public String getAddProductView(ModelMap model) {
