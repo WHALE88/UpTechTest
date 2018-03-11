@@ -55,6 +55,10 @@ public class ProductServiceImpl implements ProductService<Product> {
 		return productDao.getProdByCategoryName(name);
 	}
 
-
+	@Transactional
+	@Override
+	public List<Product> getProdByCategoryDesc(String description) {
+		return productDao.getProdByCategoryDesc(description);
+	}
 
 }

@@ -21,4 +21,11 @@ public class ProductDaoImpl extends AbstractDAO<Product> implements ProdDao<Prod
 		return result;
 	}
 
+	@Override
+	public List<Product> getProdByCategoryDesc(String description) {
+		List<Product> result = getEntityManager().createNamedQuery("Product.getProdByCategoryDesc", Product.class)
+				.setParameter("description", description).getResultList();
+		return result;
+	}
+
 }

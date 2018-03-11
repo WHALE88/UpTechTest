@@ -18,9 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "products")
 @NamedQueries({
-		@NamedQuery(name = "Product.getByName", query = "SELECT product FROM Product product WHERE product.name = :name"),
-		@NamedQuery(name = "Product.getByDescription", query = "SELECT product FROM Product product WHERE product.description = :description"),
-		@NamedQuery(name = "Product.getByName&Desc", query = "SELECT product FROM Product product  WHERE product.name = :name AND product.description = :description"),
+		@NamedQuery(name = "Product.getProdByCategoryDesc", query = "SELECT products FROM Product products INNER JOIN products.categories AS category WHERE category.description = :description"),
 		@NamedQuery(name = "Product.getProdByCategoryName", query = "SELECT products FROM Product products INNER JOIN products.categories AS category WHERE category.name = :name") })
 public class Product {
 	@Id

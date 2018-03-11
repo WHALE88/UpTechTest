@@ -18,4 +18,6 @@ public interface ProductService<E> {
 	void update(E entity);
 
 	List<Product> getProdByCategoryName(String name);
+	
+	List<Product> getProdByCategoryDesc(String description);
 }
