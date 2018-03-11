@@ -45,12 +45,6 @@ public class ProductServiceImpl implements GeneralService<Product> {
 	}
 
 	@Transactional
-	public void update(long id) {
-		productDao.update(id);
-
-	}
-
-	@Transactional
 	public void update(Product entity) {
 		productDao.update(entity);
 

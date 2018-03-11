@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "products")
 public class Product {
@@ -27,7 +29,8 @@ public class Product {
 
 	@Column(name = "description", nullable = false)
 	private String description;
-
+	
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.PERSIST })
 	@JoinColumn(name = "category_id", referencedColumnName = "id")
 	private Category categories;

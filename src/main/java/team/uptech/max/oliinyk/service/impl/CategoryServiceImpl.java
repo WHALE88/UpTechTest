@@ -45,12 +45,6 @@ public class CategoryServiceImpl implements GeneralService<Category> {
 	}
 
 	@Transactional
-	public void update(long id) {
-		categoryDao.update(id);
-
-	}
-
-	@Transactional
 	public void update(Category entity) {
 		categoryDao.update(entity);
 

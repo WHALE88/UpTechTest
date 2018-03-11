@@ -13,7 +13,5 @@ public interface GeneralService<E> {
 
 	List<E> findAll();
 
-	void update(long id);
-
 	void update(E entity);
 }

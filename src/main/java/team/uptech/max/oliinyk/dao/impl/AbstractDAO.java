@@ -59,12 +59,6 @@ public abstract class AbstractDAO<E> implements DAO<E> {
 		return query.getResultList();
 	}
 
-	public void update(long id) {
-		if (getEntityManager().contains(findEntityById(id))) {
-			getEntityManager().merge(findEntityById(id));
-		}
-	}
-
 	public void update(E entity) {
 		if (getEntityManager().contains(entity)) {
 			getEntityManager().merge(entity);
