@@ -18,7 +18,10 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "categories")
-@NamedQueries({ @NamedQuery(name = "Category.All", query = "SELECT category FROM Category category") })
+@NamedQueries({
+		@NamedQuery(name = "Category.getByName", query = "SELECT categories FROM Category categories WHERE categories.name = :name"),
+		@NamedQuery(name = "Category.getByDescription", query = "SELECT categories FROM Category categories WHERE categories.description = :description"),
+		@NamedQuery(name = "Category.getByName&Desc", query = "SELECT categories FROM Category categories  WHERE categories.name = :name AND categories.description = :description") })
 public class Category {
 
 	@Id

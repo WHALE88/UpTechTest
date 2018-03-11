@@ -9,12 +9,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "products")
+@NamedQueries({
+		@NamedQuery(name = "Product.getByName", query = "SELECT product FROM Product product WHERE product.name = :name"),
+		@NamedQuery(name = "Product.getByDescription", query = "SELECT product FROM Product product WHERE product.description = :description"),
+		@NamedQuery(name = "Product.getByName&Desc", query = "SELECT product FROM Product product  WHERE product.name = :name AND product.description = :description") })
 public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +35,7 @@ public class Product {
 
 	@Column(name = "description", nullable = false)
 	private String description;
-	
+
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.PERSIST })
 	@JoinColumn(name = "category_id", referencedColumnName = "id")

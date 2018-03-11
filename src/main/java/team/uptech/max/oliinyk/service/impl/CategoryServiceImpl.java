@@ -26,7 +26,6 @@ public class CategoryServiceImpl implements GeneralService<Category> {
 	@Transactional
 	public void delete(long id) {
 		categoryDao.delete(id);
-
 	}
 
 	@Transactional
@@ -47,7 +46,20 @@ public class CategoryServiceImpl implements GeneralService<Category> {
 	@Transactional
 	public void update(Category entity) {
 		categoryDao.update(entity);
-
 	}
 
+	@Transactional
+	public List<Category> getCategoriesByName(String name) {
+		return categoryDao.getCategoriesByName(name);
+	}
+
+	@Transactional
+	public List<Category> getCategoriesByDescription(String description) {
+		return categoryDao.getCategoriesByDescription(description);
+	}
+
+	@Transactional
+	public List<Category> getCategoriesByNameDescription(String name, String description) {
+		return categoryDao.getCategoriesByNameDescription(name, description);
+	}
 }

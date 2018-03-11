@@ -1,5 +1,8 @@
 package team.uptech.max.oliinyk.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -50,6 +53,16 @@ public class CategoryController {
 
 	}
 
+	@GetMapping(value = "/findall", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<String>> getAllCategory() {
+		List<Category> cat = categoryService.findAll();
+		List<String> str = new ArrayList<>();
+		for (Category category : cat) {
+			str.add(getJSON(category.getName(), category.getDescription(), category.getProducts().stream().count()));
+		}
+		return new ResponseEntity<List<String>>(str, HttpStatus.OK);
+	}
+
 	// @PutMapping
 	@GetMapping(value = "/updatecategory/{id}/{description}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> updateCategory(@PathVariable(value = "id") long id,
@@ -64,6 +77,36 @@ public class CategoryController {
 				getJSON(category.getName(), category.getDescription(), category.getProducts().stream().count()),
 				HttpStatus.OK);
 
+	}
+
+	@GetMapping(value = "/findcategorybyname/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<String>> findCategoryByName(@PathVariable(value = "name") String name) {
+		List<Category> cat = categoryService.getCategoriesByName(name);
+		List<String> str = new ArrayList<>();
+		if (cat != null) {
+			for (Category category : cat) {
+				str.add(getJSON(category.getName(), category.getDescription(),
+						category.getProducts().stream().count()));
+			}
+			return new ResponseEntity<List<String>>(str, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<List<String>>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@GetMapping(value = "/findcategorybydesc/{description}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<String>> findCategoryByDesc(@PathVariable(value = "description") String description) {
+		List<Category> cat = categoryService.getCategoriesByDescription(description);
+		List<String> str = new ArrayList<>();
+		if (cat != null) {
+			for (Category category : cat) {
+				str.add(getJSON(category.getName(), category.getDescription(),
+						category.getProducts().stream().count()));
+			}
+			return new ResponseEntity<List<String>>(str, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<List<String>>(HttpStatus.NOT_FOUND);
+		}
 	}
 
 	private final String getJSON(String name, String description, long total) {

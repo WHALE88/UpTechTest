@@ -50,4 +50,19 @@ public class ProductServiceImpl implements GeneralService<Product> {
 
 	}
 
+	@Transactional
+	public List<Product> getCategoriesByName(String name) {
+		return productDao.getCategoriesByName(name);
+	}
+
+	@Transactional
+	public List<Product> getCategoriesByDescription(String description) {
+		return productDao.getCategoriesByDescription(description);
+	}
+
+	@Transactional
+	public List<Product> getCategoriesByNameDescription(String name, String description) {
+		return productDao.getCategoriesByNameDescription(name, description);
+	}
+
 }

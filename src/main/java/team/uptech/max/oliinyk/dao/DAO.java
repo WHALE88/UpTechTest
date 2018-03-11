@@ -14,4 +14,10 @@ public interface DAO<E> {
 	List<E> findAll();
 
 	void update(E entity);
+
+	List<E> getCategoriesByName(String name);
+
+	List<E> getCategoriesByDescription(String description);
+
+	List<E> getCategoriesByNameDescription(String name, String description);
 }
