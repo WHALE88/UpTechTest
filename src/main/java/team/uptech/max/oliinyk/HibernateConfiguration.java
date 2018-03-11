@@ -16,6 +16,11 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import team.uptech.max.oliinyk.filter.HibernateStatisticsInterceptor;
+import team.uptech.max.oliinyk.filter.RequestStatisticsInterceptor;
 
 @Configuration
 @EnableTransactionManagement
@@ -54,6 +59,7 @@ public class HibernateConfiguration {
 		properties.put(AvailableSettings.HBM2DDL_AUTO, env.getRequiredProperty("hibernate.hbm2ddl.auto"));
 		properties.put(AvailableSettings.CURRENT_SESSION_CONTEXT_CLASS,
 				env.getRequiredProperty("hibernate.current.session.context.class"));
+		properties.put("hibernate.ejb.interceptor", hibernateInterceptor());
 		return properties;
 	}
 
@@ -71,5 +77,27 @@ public class HibernateConfiguration {
 	@Bean
 	public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
 		return new PersistenceExceptionTranslationPostProcessor();
+	}
+	
+	@Bean
+	public HibernateStatisticsInterceptor hibernateInterceptor() {
+		return new HibernateStatisticsInterceptor();
+	}
+
+	@Configuration
+	public static class WebApplicationConfig implements WebMvcConfigurer {
+
+		@Autowired
+		RequestStatisticsInterceptor requestStatisticsInterceptor;
+
+		@Bean
+		public RequestStatisticsInterceptor requestStatisticsInterceptor() {
+			return new RequestStatisticsInterceptor();
+		}
+
+		@Override
+		public void addInterceptors(InterceptorRegistry registry) {
+			registry.addInterceptor(requestStatisticsInterceptor).addPathPatterns("/**");
+		}
 	}
 }

@@ -16,6 +16,7 @@ import team.uptech.max.oliinyk.service.GeneralService;
 
 @RestController
 public class ProductController {
+
 	@Autowired
 	private GeneralService<Category> categoryService;
 
